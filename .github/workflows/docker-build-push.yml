@@ -2,18 +2,8 @@
     workflow_call:
 
   jobs:
-    set-environment:
-      runs-on: ubuntu-latest
-      outputs:
-        environment_type: ${{ steps.set_env.outputs.environment_type }}
-      steps:
-        - name: Set environment based on branch name
-          id: set_env
-          uses: bbhupati/poc-action-templates/.github/workflows/set-env.yml@master
-
     docker-build-push:
       runs-on: ubuntu-latest
-      needs: [set-environment]
       steps:
         - name: Checkout code
           uses: actions/checkout@v2
