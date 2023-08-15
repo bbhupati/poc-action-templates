@@ -1,6 +1,7 @@
   on:
     workflow_call:
 
+  # docker-build-push.yml
   jobs:
     docker-build-push:
       runs-on: ubuntu-latest
@@ -10,13 +11,15 @@
           
         - name: Read environment file and set environment variables
           run: |
-            ENV_FILE=".github/workflows/${{ needs.set-environment.outputs.environment_type }}-vars.env"
+            echo "env is $ENVIRONMENT_TYPE"
+            ENV_FILE=".github/workflows/${ENVIRONMENT_TYPE}-vars.env"
             cat $ENV_FILE >> $GITHUB_ENV
             echo "Loaded $ENV_FILE into environment variables"
         - name: Display loaded environment variables
           run: |
             echo "API_URL=$API_URL"
             echo "DATABASE_URL=$DATABASE_URL"
+
 
   # docker-build-push:
   #   runs-on: ubuntu-latest
