@@ -1,0 +1,23 @@
+name: Build and Deploy
+
+on:
+  workflow_call:
+
+jobs:
+  set-environment:
+    runs-on: ubuntu-latest
+    outputs:
+      environment_type: ${{ steps.set_env.outputs.environment }}
+    steps:
+      - name: Set environment based on branch name
+        id: set_env
+        run: |
+          if [[ ${{ github.ref }} == "refs/heads/dev" ]]; then
+            echo "environment=dev" >> $GITHUB_OUTPUT
+          elif [[ ${{ github.ref }} == "refs/heads/qa" ]]; then
+            echo "environment=qa" >> $GITHUB_OUTPUT
+          elif [[ ${{ github.ref }} == "refs/heads/master" ]]; then
+            echo "environment=prod" >> $GITHUB_OUTPUT
+          else
+            echo "environment=unknown environment" >> $GITHUB_OUTPUT
+          fi
