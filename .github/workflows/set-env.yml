@@ -3,15 +3,15 @@ name: setup environment
 on:
   workflow_call:
     outputs:
-        environment_type:
+        environment:
             description: "Get variables files dynamically based on commit branch"
-            value:  ${{ jobs.set-environment.outputs.environment }}
+            value:  ${{ jobs.set-environment.outputs.environment_type }}
 
 jobs:
   set-environment:
     runs-on: ubuntu-latest
     outputs:
-        environment: ${{ steps.set_env.outputs.environment }}
+        environment_type: ${{ steps.set_env.outputs.environment }}
     steps:
       - name: Set environment based on branch name
         id: set_env
