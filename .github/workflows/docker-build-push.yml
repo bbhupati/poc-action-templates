@@ -1,35 +1,39 @@
   on:
     workflow_call:
 
-  # # docker-build-push.yml
-  # jobs:
-  #   docker-build-push:
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - name: Checkout code
-  #         uses: actions/checkout@v2
-          
-  #       - name: Read environment file and set environment variables
-  #         run: |
-  #           echo "env is $ENVIRONMENT_TYPE"
-  #           ENV_FILE=".github/workflows/${ENVIRONMENT_TYPE}-vars.env"
-  #           cat $ENV_FILE >> $GITHUB_ENV
-  #           echo "Loaded $ENV_FILE into environment variables"
-  #       - name: Display loaded environment variables
-  #         run: |
-  #           echo "API_URL=$API_URL"
-  #           echo "DATABASE_URL=$DATABASE_URL"
-
-  
+  # docker-build-push.yml
   jobs:
+
     job1:
       uses: bbhupati/poc-action-templates/.github/workflows/set-env.yml@master
-  
-    job2:
+
+    docker-build-push:
       runs-on: ubuntu-latest
-      needs: job1
       steps:
-        - run: echo ${{ needs.job1.outputs.environment }}
+        - name: Checkout code
+          uses: actions/checkout@v2
+          
+        - name: Read environment file and set environment variables
+          run: |
+            echo "env is ${{ needs.job1.outputs.environment }}
+            ENV_FILE=".github/workflows/${{ needs.job1.outputs.environment }}-vars.env"
+            cat $ENV_FILE >> $GITHUB_ENV
+            echo "Loaded $ENV_FILE into environment variables"
+        - name: Display loaded environment variables
+          run: |
+            echo "API_URL=$API_URL"
+            echo "DATABASE_URL=$DATABASE_URL"
+
+  
+  # jobs:
+  #   job1:
+  #     uses: bbhupati/poc-action-templates/.github/workflows/set-env.yml@master
+  
+  #   job2:
+  #     runs-on: ubuntu-latest
+  #     needs: job1
+  #     steps:
+  #       - run: echo ${{ needs.job1.outputs.environment }}
   
   # docker-build-push:
   #   runs-on: ubuntu-latest
