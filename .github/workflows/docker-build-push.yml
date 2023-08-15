@@ -16,7 +16,7 @@
           
         - name: Read environment file and set environment variables
           run: |
-            echo "env is ${{ needs.job1.outputs.environment }}
+            echo "env is ${{ needs.job1.outputs.environment }}"
             ENV_FILE=".github/workflows/${{ needs.job1.outputs.environment }}-vars.env"
             cat $ENV_FILE >> $GITHUB_ENV
             echo "Loaded $ENV_FILE into environment variables"
