@@ -9,7 +9,7 @@
       steps:
         - name: Set environment based on branch name
           id: set_env
-          uses: .github/workflows/set-env.yml
+          uses: bbhupati/poc-action-templates/.github/workflows/set-env.yml@master
 
     docker-build-push:
       runs-on: ubuntu-latest
