@@ -3,19 +3,19 @@
 
   jobs:
 
-    get-env:
-      uses: bbhupati/poc-action-templates/.github/workflows/set-env.yml@master
+    # get-env:
+    #   uses: bbhupati/poc-action-templates/.github/workflows/set-env.yml@master
 
     docker-build-push:
       runs-on: ubuntu-latest
-      needs: get-env
+      # needs: get-env
       steps:
         - name: Checkout code
           uses: actions/checkout@v2
           
         - name: Read environment file and set environment variables
           run: |
-            ENV_FILE=".github/workflows/${{ needs.get-env.outputs.environment }}-vars.env"
+            ENV_FILE=".github/workflows/${{ needs.pre-job.outputs.environment }}-vars.env"
             cat $ENV_FILE >> $GITHUB_ENV
             echo "Loaded $ENV_FILE into environment variables"
 

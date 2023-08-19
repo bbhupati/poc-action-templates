@@ -5,10 +5,10 @@ on:
     outputs:
         environment:
             description: "Get variables files dynamically based on commit branch"
-            value:  ${{ jobs.set-environment.outputs.environment_type }}
+            value:  ${{ jobs.pre-job.outputs.environment_type }}
 
 jobs:
-  set-environment:
+  pre-job:
     runs-on: ubuntu-latest
     outputs:
         environment_type: ${{ steps.set_env.outputs.environment }}
