@@ -26,4 +26,4 @@ jobs:
             echo "environment=unknown environment" >> $GITHUB_OUTPUT
           fi
 
-          echo "env is $environment , another env is ${{ env.environment }}, one more env is $GITHUB_OUTPUT"
+          echo "env is $environment , another env is ${{ env.environment }}, one more env is $GITHUB_OUTPUT env is ${{ steps.set_env.outputs.environment_type }}" 
