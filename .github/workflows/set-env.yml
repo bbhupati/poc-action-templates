@@ -26,5 +26,14 @@ jobs:
             echo "environment=unknown environment" >> $GITHUB_OUTPUT
           fi
 
-          echo "env is $environment , another env is ${{ env.environment_type }}, env is ${{ steps.set_env.outputs.environment_type }}" 
+          echo "Environment: $environment"
           cat $GITHUB_OUTPUT
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Use Environment
+        run: |
+          echo "Environment: $environment"
