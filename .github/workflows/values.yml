@@ -1,0 +1,10 @@
+name: build and deploy
+
+on:
+  workflow_call:
+
+jobs:
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ needs.job1.outputs.firstword }} ${{ needs.job1.outputs.secondword }}
