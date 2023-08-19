@@ -1,0 +1,18 @@
+name: Reusable workflow
+
+on:
+  workflow_call:
+    
+jobs:
+    save_variable:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Create file with variable data
+          run: echo "variable_value=your_value" >> variable.txt
+        
+        - name: Upload artifact
+          uses: actions/upload-artifact@v2
+          with:
+            name: shared-data
+            path: variable.txt
+  

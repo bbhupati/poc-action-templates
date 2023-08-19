@@ -1,0 +1,19 @@
+name: Reusable workflow
+
+on:
+  workflow_call:
+
+jobs:
+    use_variable:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Download artifact
+            uses: actions/download-artifact@v2
+            with:
+                name: shared-data
+                
+          - name: Read variable data
+            run: |
+                VARIABLE=$(cat variable.txt)
+                echo "Variable value: $VARIABLE"
+      
