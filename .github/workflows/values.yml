@@ -4,12 +4,16 @@ on:
   workflow_call:
 
 jobs:
-  job2:
+  deployment:
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref == 'refs/heads/main' && 'production' || github.ref == 'refs/heads/dev' && 'dev' || 'unknown' }}
     steps:
-      - run: |
-            source $GITHUB_ENV
-            cat $GITHUB_ENV
-            echo $firstword
-
-            #echo ${{ needs.job1.outputs.firstword }} ${{ needs.job1.outputs.secondword }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+              
+      - name: Download artifact
+        run: |
+          name=${{ github.ref_name == 'main' && 'production' || github.ref_name == 'dev' && 'dev' || 'unknown' }}
+          echo $name
+    
