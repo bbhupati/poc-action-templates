@@ -15,4 +15,4 @@ jobs:
           - name: Read variable data
             run: |
               source variable.txt
-              echo "Name: $name"
+              echo "my name is : $name"
