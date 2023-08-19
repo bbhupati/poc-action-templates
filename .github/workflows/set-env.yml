@@ -25,3 +25,5 @@ jobs:
           else
             echo "environment=unknown environment" >> $GITHUB_OUTPUT
           fi
+
+          echo "env is $environment , another env is ${{ env.environment }}, one more env is $GITHUB_OUTPUT"
