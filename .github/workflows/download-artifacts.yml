@@ -14,6 +14,5 @@ jobs:
                 
           - name: Read variable data
             run: |
-                VARIABLE=$(cat variable.txt)
-                echo "Variable value: $VARIABLE"
-      
+              source variable.txt
+              echo "Name: $name"

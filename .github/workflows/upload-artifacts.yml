@@ -8,7 +8,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Create file with variable data
-          run: echo "variable_value=your_value" >> variable.txt
+          run: echo "name=navya" >> variable.txt
         
         - name: Upload artifact
           uses: actions/upload-artifact@v2
