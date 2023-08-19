@@ -20,7 +20,7 @@
 
         - name: Read environment file and set environment variables
           run: |
-            source variable.txt
+            source prejob-vars.txt
             ENV_FILE=".github/workflows/$environment_type-vars.env"
             cat $ENV_FILE >> $GITHUB_ENV
             echo "Loaded $ENV_FILE into environment variables"
