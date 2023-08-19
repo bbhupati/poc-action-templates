@@ -30,10 +30,11 @@ jobs:
           cat $GITHUB_OUTPUT
   test:
     runs-on: ubuntu-latest
+    needs: pre-job
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         
       - name: Use Environment
         run: |
-          echo "Environment: $environment"
+          echo "Environment: ${{ env.environment }}"
