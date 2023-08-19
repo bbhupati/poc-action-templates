@@ -7,5 +7,9 @@ jobs:
   job2:
     runs-on: ubuntu-latest
     steps:
-      - run: echo $firstword
+      - run: |
+            source $GITHUB_ENV
+            cat $GITHUB_ENV
+            echo $firstword
+
             #echo ${{ needs.job1.outputs.firstword }} ${{ needs.job1.outputs.secondword }}
