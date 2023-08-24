@@ -9,9 +9,9 @@
           uses: actions/checkout@v2
 
         - name: testing task
-          if: contains(github.repository, 'actions')
+          if: contains(github.repository, 'navya')
           run: |
-            echo "This step runs only if repository name contains 'actions'"
+            echo "This step runs only if repository name contains 'navya', but it contains ${{ github.repository }}"
 
         # - name: Download artifact
         #   if: contains(github.repository, 'actions')
