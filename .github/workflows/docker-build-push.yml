@@ -7,12 +7,17 @@
       steps:
         - name: Checkout code
           uses: actions/checkout@v2
-          
-        - name: Download artifact
+
+        - name: testing task
           if: contains(github.repository, 'actions')
-          uses: actions/download-artifact@v2
-          with:
-              name: shared-data
+          run: |
+            echo "This step runs only if repository name contains 'actions'"
+
+        # - name: Download artifact
+        #   if: contains(github.repository, 'actions')
+        #   uses: actions/download-artifact@v2
+        #   with:
+        #       name: shared-data
 
         - name: Read environment file and set environment variables
           run: |
