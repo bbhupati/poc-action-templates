@@ -1,19 +1,52 @@
-name: build and deploy
+# name: build and deploy
 
+# on:
+#   workflow_call:
+
+# jobs:
+#   deployment:
+#     runs-on: ubuntu-latest
+#     environment:
+#       name: ${{ github.ref == 'refs/heads/main' && 'production' || github.ref == 'refs/heads/dev' && 'dev' || 'unknown' }}
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+              
+#       - name: Download artifact
+#         run: |
+#           name=${{ github.ref_name == 'main' && 'production' || github.ref_name == 'dev' && 'dev' || 'unknown' }}
+#           echo $name
+  
 on:
   workflow_call:
 
 jobs:
-  deployment:
+  download-secret:
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref == 'refs/heads/main' && 'production' || github.ref == 'refs/heads/dev' && 'dev' || 'unknown' }}
+    env:
+      ENVIRONMENT: dev  # Change this to the desired environment (e.g., dev, qa, prod)
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-              
-      - name: Download artifact
+
+      - name: Set up environment variables
         run: |
-          name=${{ github.ref_name == 'main' && 'production' || github.ref_name == 'dev' && 'dev' || 'unknown' }}
-          echo $name
-    
+          # Choose the secret based on the environment
+          case "${{ env.ENVIRONMENT }}" in
+            "dev")
+              echo "${{ vars.ACR_REGISTRY_DEV }}" > ./secret-file.txt
+              ;;
+            "qa")
+              echo "${{ vars.ACR_REGISTRY_STAGING }}" > ./secret-file.txt
+              ;;
+            "prod")
+              echo "${{ vars.ACR_REGISTRY_PROD }}" > ./secret-file.txt
+              ;;
+            *)
+              echo "Invalid environment specified"
+              exit 1
+              ;;
+          esac
+
+      - name: Display the downloaded secret file
+        run: cat ./secret-file.txt
