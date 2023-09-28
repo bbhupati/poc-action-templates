@@ -34,13 +34,13 @@ jobs:
           # Choose the secret based on the environment
           case "${{ env.ENVIRONMENT }}" in
             "dev")
-              echo "${{ vars.ACR_REGISTRY_DEV }}" > ./secret-file.txt
+              echo "${{ secrets.STORAGE_ACC_CONNECTION_STRING }}" > ./secret-file.txt
               ;;
             "qa")
-              echo "${{ vars.ACR_REGISTRY_STAGING }}" > ./secret-file.txt
+              echo "${{ secrets.STORAGE_ACC_CONNECTION_STRING }}" > ./secret-file.txt
               ;;
             "prod")
-              echo "${{ vars.ACR_REGISTRY_PROD }}" > ./secret-file.txt
+              echo "${{ secrets.STORAGE_ACC_CONNECTION_STRING }}" > ./secret-file.txt
               ;;
             *)
               echo "Invalid environment specified"
